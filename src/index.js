@@ -3,12 +3,10 @@ const Sentry = require('@sentry/node');
 module.exports = function () {
     return {
 
-        reportTaskStart (/* startTime, userAgents, testCount */) {
-            // do nothing
-        },
+        reportTaskStart ( startTime, userAgents, testCount ) {},
 
-        reportFixtureStart (/* name, path, meta */) {
-            // do nothing
+        reportFixtureStart ( name, path, meta ) {
+            this.currentFixtureName = name;
         },
 
         reportTestDone (name, testRunInfo, meta) {
@@ -19,13 +17,11 @@ module.exports = function () {
                 Sentry.init({
                     dsn: sentryDsn
                 });
-                Sentry.captureEvent({ message: `Error with testcafe test ${name}. ${testRunInfo}`, level: Sentry.Severity.Error, extra: testRunInfo });
+                Sentry.captureEvent({ message: `Error with testcafe test ${this.currentFixtureName} ${name}. ${testRunInfo}`, level: Sentry.Severity.Error, extra: testRunInfo });
             }
             
         },
 
-        reportTaskDone (/* endTime, passed, warnings, results */) {
-            // do nothing
-        }
+        reportTaskDone ( endTime, passed, warnings, results ) {}
     };
 };

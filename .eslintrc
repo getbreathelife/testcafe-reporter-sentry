@@ -1,6 +1,5 @@
 {
   "parser": "babel-eslint",
-  "extends": "eslint:recommended",
   "rules": {
     "no-alert": 2,
     "no-array-constructor": 2,
