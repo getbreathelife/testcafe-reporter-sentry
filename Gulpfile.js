@@ -8,18 +8,6 @@ function clean (cb) {
     del('lib', cb);
 }
 
-function lint () {
-    return gulp
-        .src([
-            'src/**/*.js',
-            'test/**/*.js',
-            'Gulpfile.js'
-        ])
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failAfterError());
-}
-
 function build () {
     return gulp
         .src('src/**/*.js')
@@ -53,7 +41,6 @@ function preview () {
 }
 
 exports.clean = clean;
-exports.lint = lint;
-exports.test = gulp.series(clean, lint, build, test);
-exports.build = gulp.series(clean, lint, build);
-exports.preview = gulp.series(clean, lint, build, preview);
+exports.test = gulp.series(clean, build, test);
+exports.build = gulp.series(clean, build);
+exports.preview = gulp.series(clean, build, preview);

@@ -1,6 +1,6 @@
 {
   "name": "testcafe-reporter-sentry",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "sentry TestCafe reporter plugin.",
   "repository": "https://github.com/fallard84/testcafe-reporter-sentry",
   "author": {
@@ -19,7 +19,8 @@
   "keywords": [
     "testcafe",
     "reporter",
-    "plugin"
+    "plugin",
+    "sentry"
   ],
   "license": "MIT",
   "devDependencies": {
