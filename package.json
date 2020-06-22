@@ -1,6 +1,6 @@
 {
   "name": "testcafe-reporter-sentry",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sentry TestCafe reporter plugin.",
   "repository": "https://github.com/fallard84/testcafe-reporter-sentry",
   "author": {
