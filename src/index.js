@@ -8,6 +8,7 @@ module.exports = function() {
         reportFixtureStart(name, path, meta) {
             this.currentFixtureName = name;
             this.sentryDsn = meta != null && meta.sentryDsn;
+            this.sentryTags = meta != null && meta.sentryTags;
             this.environment = meta != null && meta.environment;
         },
 
@@ -17,6 +18,8 @@ module.exports = function() {
                 (meta !== null && meta.sentryDsn) ||
                 this.sentryDsn ||
                 process.env.SENTRY_DSN;
+            const sentryTags = (meta !== null && meta.sentryTags) ||
+                this.sentryTags;
             const environment =
                 (meta !== null && meta.environment) ||
                 this.environment ||
@@ -27,6 +30,13 @@ module.exports = function() {
                     dsn: sentryDsn,
                     environment
                 });
+
+                if (sentryTags) {
+                    Sentry.configureScope(scope => {
+                        scope.setTags(sentryTags);
+                    });
+                }
+
                 testRunInfo.errs.forEach((error, id) => {
                     this.sendErrorToSentry(error, id, name);
                 });
